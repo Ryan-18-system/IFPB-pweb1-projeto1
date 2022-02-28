@@ -1,21 +1,26 @@
 class ClienteEspecial extends Cliente {
-  constructor(nome, cpf, conta, contaEspecial) {
+  constructor(nome, cpf, conta) {
     super(nome, cpf, conta)
-    this._contaEspecial = contaEspecial
+    this._contaEspecial = new Conta()
   }
   get contaEspecial() {
     return this._contaEspecial
   }
   set contaEspecial(numero) {
-    this._contaEspecial = numero
+    this._contaEspecial.numero = numero
   }
   get contaEspecialSaldo() {
-    this._contaEspecial.saldo
+    return this._contaEspecial.saldo
   }
-  set contaEspecialSaldo(newSaldo) {
-    this._contaEspecial.saldo = newSaldo
+  creditarContaEspecial(newSaldo){
+    this._contaEspecial.creditar(newSaldo)
   }
+  debitarContaEspecial(valor){
+    this._contaEspecial.debitar(valor)
+  }
+
   saldoTotal() {
-    return Cliente.saldo + this.contaEspecialSaldo()
+    return this.conta.saldo + this.contaEspecialSaldo
   }
+
 }
